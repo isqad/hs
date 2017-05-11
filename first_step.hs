@@ -28,12 +28,12 @@ zipWith' f (x:xs) (y:ys) = (f x y) : zipWith' f xs ys
 quicksort' :: (Ord a) => [a] -> [a]
 quicksort' [] = []
 quicksort' (x:xs) = 
-    let biggerS = quicksort' (filter (> x) xs)
-        smallerS = quicksort' (filter (<= x) xs)
+    let biggerS = quicksort' $ filter (> x) xs
+        smallerS = quicksort' $ filter (<= x) xs
     in smallerS ++ [x] ++ biggerS
 
 largestDiv :: Integer
-largestDiv = head (filter p [100000,99999..])
+largestDiv = head . filter p $ [100000,99999..]
   where p x = x `mod` 3829 == 0
 
 chain :: Integer -> [Integer]
@@ -43,7 +43,7 @@ chain n
   | odd n = n:chain (n * 3 + 1)
 
 numLongestChain :: Int
-numLongestChain = length (filter (\xs -> length xs > 15) (map (chain) [1..100]))
+numLongestChain = length . filter (\xs -> length xs > 15) $ map (chain) [1..100]
 
 flip' :: (a -> b -> c) -> b -> a -> c
 flip' f a b = f b a
